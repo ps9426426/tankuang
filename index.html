@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+	<button id="btn">弹框</button>
+	<script>
+
+		function alertBox(){
+			this.btn=document.getElementById("btn");
+			this.mark();
+		}	
+		alertBox.prototype = {
+			constructor:alertBox,
+			mark:function(){
+				var that=this;
+				this.btn.onclick=function(){
+					that.mark=document.createElement("div");
+					that.mark.className="mark";
+					document.body.appendChild(that.mark);
+					that.box();
+				}
+			},
+			box:function(){
+				var that=this;
+				this.box=document.createElement("div");
+				this.box.className="box";
+				this.box.innerHTML=`<h3>你饿不饿呀</h3><button id='btn1'>饿</button><button id='btn2'>饿死了</button>`;
+				console.log(this.box)
+				this.mark.appendChild(this.box);
+				that.dele();
+				that.dele1();
+			},
+			dele:function(){
+				var that=this;
+				this.btn1=document.getElementById("btn1");
+				this.btn1.onclick=function(){
+					document.body.removeChild(that.mark)
+				}
+			},
+			dele1:function(){
+				var that=this;
+				this.btn2=document.getElementById("btn2");
+				this.btn2.onclick=function(){
+					alert("那你还点鼠标！！")
+				}
+			}
+		}
+		new alertBox();
+	</script>
+</body>
+</html>
